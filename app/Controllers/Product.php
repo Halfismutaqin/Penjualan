@@ -10,12 +10,14 @@ class Product extends BaseController
     {
 
         $data['title'] = 'Product';
+        $data['cart'] =\Config\Services::cart();
 
         return view('product', $data);
     }
 
     public function read()
     {
+        $data['cart'] =\Config\Services::cart();
         $productModel = new \App\Models\Product();
         $products = $productModel->getDataForBootstrapTable($this->request);        
         return $this->response->setJSON($products);
@@ -160,4 +162,15 @@ class Product extends BaseController
             'response' => 'Success '. $count .' delete data '
         ]);
     }
+
+    // public function cek()
+    // {
+    //     $cart = \Config\Services::cart();
+    //     // $cart =
+    //     $response = $cart->contents();
+    //     $data = json_encode($response);
+    //     echo '<pre>';
+    //     print_r($data);
+    //     echo '<pre>';
+    // }
 }

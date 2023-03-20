@@ -89,7 +89,7 @@
             });
 
             // Load shopping cart
-            $('#detail_cart').load("<?php echo base_url(); ?>index.php/cart/load_cart");
+            $('#detail_cart').load("<?php echo base_url(); ?>cart/load_cart");
 
             //Hapus Item Cart
             $(document).on('click', '.hapus_cart', function() {

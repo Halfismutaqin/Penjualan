@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CodeIgniter 4 Application Starter
 
 ## What is CodeIgniter?
@@ -60,3 +61,12 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+=======
+# Penjualan
+
+Tes membuat aplikasi penjualan
+
+Fitur :
+1. Login dan Register
+2. CRUD Product
+>>>>>>> c6f20fd33cc9cff7faf4e907ef738d6cce165d9d

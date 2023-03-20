@@ -34,6 +34,7 @@ class Product extends Model
                 'id' => $product['id'],
                 'product_code' => $product['product_code'],
                 'name' => $product['name'],
+                'harga' => $product['price'],
                 'price' => number_to_currency($product['price'], "IDR", "id", 0),
                 'currency' => $product['currency'],
                 'discount' => $product['discount'],
@@ -75,6 +76,7 @@ class Product extends Model
                 'id' => $product['id'],
                 'product_code' => $product['product_code'],
                 'name' => $product['name'],
+                // 'harga' => $product['price'],
                 'price' => number_to_currency($product['price'], "IDR", "id", 0),
             );
         }

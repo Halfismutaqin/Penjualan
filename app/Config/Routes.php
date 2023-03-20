@@ -34,8 +34,9 @@ $routes->set404Override();
 $routes->get('/', 'homepage::index');
  
 $routes->group('', ['filter' => 'auth'] ,function ($routes) {
-	$routes->get('/cart', 'cart::index');
-	$routes->post('/cart/add_cart', 'cart::add_to_cart');
+	$routes->get('/cek', 'homepage::cek');
+	$routes->add('/cart/add', 'homepage::add');
+	$routes->get('/cart/clear', 'homepage::clear');
 	$routes->get('/product', 'product::index');
 	$routes->get('/product/read', 'product::read');
 	$routes->post('/product/create', 'product::create');

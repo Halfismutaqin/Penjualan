@@ -18,12 +18,17 @@ class Cart extends BaseController
     }
  
     function add_to_cart(){ //fungsi Add To Cart
-        $data = array(
-            'id' => $this->input->post('id'), 
-            'name' => $this->input->post('name'), 
-            'price' => $this->input->post('price'), 
-            'qty' => $this->input->post('quantity'), 
-        );
+        
+        $data['id'] = $this->request->getPost('id');
+        $data['name'] = $this->request->getPost('name');
+        $data['price'] = $this->request->getPost('price');
+        $data['qty'] = $this->request->getPost('quantity');
+        // $data = array(
+        //     'id' => $this->input->post('id'), 
+        //     'name' => $this->input->post('name'), 
+        //     'price' => $this->input->post('price'), 
+        //     'qty' => $this->input->post('quantity'), 
+        // );
         $this->cart->insert($data);
         echo $this->show_cart(); //tampilkan cart setelah added
     }
