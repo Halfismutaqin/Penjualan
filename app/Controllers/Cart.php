@@ -6,13 +6,17 @@ use App\Controllers\BaseController;
 
 class Cart extends BaseController
 {
+    public function __construct(){
+        helper('number');
+        helper('form');
+    }
       
     function index(){
         
         $data['title'] = 'Cart';
-
-        $productModel = new \App\Models\Cart();
-        $data['data'] = $productModel->get_all_product();
+        $data['cart'] =\Config\Services::cart();
+        // $productModel = new \App\Models\Cart();
+        // $data['data'] = $productModel->get_all_product();
 
         return view('v_cart', $data);
     }

@@ -333,7 +333,7 @@
     
     <div class="mb-3">
     <label class="form-label text-capitalize">Product Code</label>
-    <input name="product_code" type="text" class="form-control">
+    <input name="product_code" type="text" class="form-control" autofocus>
     </div>
 
     <div class="mb-3">

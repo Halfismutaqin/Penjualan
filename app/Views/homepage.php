@@ -2,8 +2,9 @@
 
 <?= $this->section('content') ?>
 
-<main class="py-5 my-auto">
-    <div class="container">
+<main class="py-2">
+    <div class="container"> 
+        <h3>Product :</h3>
 
         <?php if (!$products) : ?>
             <div class="text-center fs-3">
@@ -19,10 +20,10 @@
             }
         ?>
 
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+        <div class="row">
 
             <?php foreach ($products as $product) : ?>
-                <div class="col">
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-2">
                     <?php
                     echo form_open('cart/add');
                     echo form_hidden('id', $product['id']);
@@ -42,17 +43,16 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h3><small class="text-muted"><?= $product['price'] ?></small></h3>
-                                <span class="badge bg-danger">
-                                    <?= $product['discount'] ?>%
+                                <span class="badge bg-danger text-sm">
+                                    Disc. : &nbsp;<?= $product['discount'] ?>% 
                                 </span>
                             </div>
                             <div class="align-items-left">
-                                <p>Dimensi Produk : <?= $product['dimension'] ?></p>
-                                <p>Satuan Produk : <?= $product['unit'] ?></p>
+                                <p>Dimensi Produk : <?= $product['dimension'] ?> <br>
+                                Satuan Produk : <?= $product['unit'] ?></p>
                             </div>
 
-                            <button type="subm
-                            " class="btn btn-success"> Add</button>
+                            <button type="submit" class="btn btn-success">Add <i class="fa fa-shopping-cart"></i></button>
 
                         </div>
                     </div>

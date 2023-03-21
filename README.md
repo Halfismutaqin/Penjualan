@@ -1,8 +1,13 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # CodeIgniter 4 Application Starter
+=======
+Sistem Penjualan
+>>>>>>> 73318b6f8611baeac85ad2632dc39edcee4272f3
 
-## What is CodeIgniter?
+Diangun dengan menggunakan Framework CodeIgniter4
 
+<<<<<<< HEAD
 CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
 More information can be found at the [official site](https://codeigniter.com).
 
@@ -70,3 +75,8 @@ Fitur :
 1. Login dan Register
 2. CRUD Product
 >>>>>>> c6f20fd33cc9cff7faf4e907ef738d6cce165d9d
+=======
+Fitur yg baru dibuat:
+1. Login dan Register
+2. CRUD data Product
+>>>>>>> 73318b6f8611baeac85ad2632dc39edcee4272f3

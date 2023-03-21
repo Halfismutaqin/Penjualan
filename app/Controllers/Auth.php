@@ -6,10 +6,17 @@ use App\Controllers\BaseController;
 
 class Auth extends BaseController
 {
+    
+    public function __construct(){
+        helper('number');
+        helper('form');
+    }
     public function index_login()
     {
 
         $data['title'] = 'Login';
+        $data['cart'] =\Config\Services::cart();
+
 
         return view('auth/login', $data);
     }
@@ -102,6 +109,8 @@ class Auth extends BaseController
 
     public function register()
     {
+        // $data['cart'] =\Config\Services::cart();
+
 
         // validate input text
         $validationRule = [

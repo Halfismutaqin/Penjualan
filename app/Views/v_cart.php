@@ -1,112 +1,105 @@
-<!DOCTYPE html>
-<html>
+<?= $this->extend('_layout') ?>
 
-<head>
-    <title>Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.20.2/bootstrap-table.min.css" integrity="sha512-HIPiLbxNKmx+x+VFnDHICgl1nbRzW3tzBPvoeX0mq9dWP9H1ZGMRPXfYsHhcJS1na58bzUpbbfpQ/n4SIL7Tlw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css" integrity="sha512-o/MhoRPVLExxZjCFVBsm17Pkztkzmh7Dp8k7/3JrtNCHh0AQ489kwpfA3dPSHzKDe8YCuEhxXq3Y71eb/o6amg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<?= $this->section('content') ?>
 
-</head>
+<main class="py-2">
+    <?php
+    if (session()->getFlashdata('pesan')) {
+        echo '
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ' . session()->getFlashdata('pesan') . '
+                </div>';
+    }
+    ?>
+    <div class="container">
+        <div class="invoice">
 
-<body>
-    <div class="container-sm"><br />
-        <h2>Shopping Cart Dengan Ajax dan Codeigniter</h2>
-        <hr />
-        <div class="row">
-            <div class="col-md-8">
-                <h4>Produk</h4>
-                <div class="row">
-                    <?php foreach ($data as $product) : ?>
-                        <div class="col-md-4">
-                            <div class="card">
+            <div class="row">
+                <div class="col-12">
+                    <h4>
+                        <i class="fas fa-shopping-cart"></i> Keranjang Belanja.
+                        <br>
+                    </h4>
+                </div>
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <p class="d-flex text-right">Date: <?= date("d, M Y"); ?></small>
+                </div>
+            </div>
 
-                                <div class="card-header">
-                                    <h4><?php echo $product['name']; ?></h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <h4><?php echo ($product['price']); ?></h4>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <input type="number" name="quantity" id="<?php echo $product['id']; ?>" value="1" class="quantity form-control">
-                                        </div>
-                                    </div>
-                                    <button id="add_cart" class="add_cart btn btn-success btn-block" data-produkid="<?php echo $product['id']; ?>" data-produknama="<?php echo $product['name']; ?>" data-produkharga="<?php echo $product['price']; ?>">Add To Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+            <?php
+        echo form_open('cart/update');
+        ?>
 
+            <div class="row">
+                <div class="col-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th width="10%">Qty</th>
+                                <th>Product Code</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Subtotal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $i = 1;
+                            foreach ($cart->contents() as $key => $value) { ?>
+                                <tr>
+
+                                    <td>
+                                        <input type="hidden" value="<?= $value['rowid']; ?>">
+                                        <input type="number" class="form-control" name="qty<?= $i++ ?>" min="1" style="width: 50px;" value="<?= $value['qty']; ?>">
+                                    </td>
+                                    <td><?= $value['kode']; ?></td>
+                                    <td><?= $value['name']; ?></td>
+                                    <td><?= number_to_currency($value['price'], 'IDR'); ?></td>
+                                    <td><?= number_to_currency($value['subtotal'], 'IDR'); ?></td>
+                                    <td>
+                                        <a href="<?= base_url('cart/delete/' . $value['rowid']) ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                    </td>
+                                </tr>
+                            <?php    }
+                            ?>
+
+                        </tbody>
+
+                    </table>
+                </div>
+                    <div class="row">
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Update</a>
+
+                    </div>
+
+
+                <div class="col-6">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th style="width:50%">Total Belanja:</th>
+                                <td>
+                                    <?= number_to_currency($cart->total(), 'IDR'); ?>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <i class="fas fa-check"></i> Buy
+                            </button>
                 </div>
 
             </div>
-            <div class="col-md-4">
-                <h4>Shopping Cart</h4>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Produk</th>
-                            <th>Harga</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="detail_cart">
-
-                    </tbody>
-
-                </table>
-            </div>
         </div>
+        <?php
+        echo form_close();
+        ?>
+
     </div>
+</main>
 
-
-    <?= $this->include('_layout/js') ?>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('.add_cart').click(function() {
-            var produk_id    = $(this).data("produkid");
-            var produk_nama  = $(this).data("produknama");
-            var produk_harga = $(this).data("produkharga");
-            var quantity     = $('#' + produk_id).val();
-                $.ajax({
-                    url: "<?php echo base_url(); ?>/cart/add_to_cart",
-                    method: "POST",
-                    data: {
-                        produk_id: produk_id,
-                        produk_nama: produk_nama,
-                        produk_harga: produk_harga,
-                        quantity: quantity
-                    },
-                    success: function(data) {
-                        $('#detail_cart').html(data);
-                    }
-                });
-            });
-
-            // Load shopping cart
-            $('#detail_cart').load("<?php echo base_url(); ?>cart/load_cart");
-
-            //Hapus Item Cart
-            $(document).on('click', '.hapus_cart', function() {
-                var row_id = $(this).attr("id"); //mengambil row_id dari artibut id
-                $.ajax({
-                    url: "<?php echo base_url(); ?>cart/hapus_cart",
-                    method: "POST",
-                    data: {
-                        row_id: row_id
-                    },
-                    success: function(data) {
-                        $('#detail_cart').html(data);
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-
-</html>
+<?= $this->endSection() ?>

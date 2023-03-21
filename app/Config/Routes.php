@@ -35,6 +35,9 @@ $routes->get('/', 'homepage::index');
  
 $routes->group('', ['filter' => 'auth'] ,function ($routes) {
 	$routes->get('/cek', 'homepage::cek');
+	$routes->get('/cart', 'cart::index');
+	$routes->post('/cart/update', 'homepage::update_cart');
+	$routes->get('/cart/delete/(:any)', 'homepage::delete/$1');
 	$routes->add('/cart/add', 'homepage::add');
 	$routes->get('/cart/clear', 'homepage::clear');
 	$routes->get('/product', 'product::index');

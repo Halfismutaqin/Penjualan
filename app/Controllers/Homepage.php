@@ -27,9 +27,9 @@ class Homepage extends BaseController
         $cart = \Config\Services::cart();
         // $cart =
         $response = $cart->contents();
-        $data = json_encode($response);
+        // $data = json_encode($response);
         echo '<pre>';
-        print_r($data);
+        print_r($response);
         echo '<pre>';
     }
 
@@ -51,5 +51,28 @@ class Homepage extends BaseController
     {
         $cart = \Config\Services::cart();
         $cart->destroy();
+    }
+
+    public function update_cart()
+    {
+        $cart = \Config\Services::cart();
+        $i = 1;
+        foreach ($cart->contents() as $key => $value) {
+            $cart->update(array(
+                'rowid'     => $value['rowid'],
+                'qty'       => $this->request->getPost('qty'. $i++),
+            ));
+            session()->setFlashdata('pesan', 'Data Keranjang berhasil diupdate');
+            return redirect()->to(base_url('cart'));
+        }
+    }
+
+    public function delete($rowid)
+    {        
+        $cart = \Config\Services::cart();
+        $cart->remove($rowid);
+        
+        session()->setFlashdata('pesan', 'Data Keranjang berhasil didelete');
+        return redirect()->to(base_url('cart'));
     }
 }

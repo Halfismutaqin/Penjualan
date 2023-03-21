@@ -40,7 +40,6 @@ class Product extends Model
                 'discount' => $product['discount'],
                 'dimension' => $product['dimension'],
                 'unit' => $product['unit'],
-                // 'photo' => base_url('uploads/'.$product['photo'])
             );
         }   
 

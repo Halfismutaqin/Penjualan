@@ -4,8 +4,14 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
+use App\Controllers\Homepage;
+
 class Product extends BaseController
 {
+    public function __construct(){
+        helper('number');
+        helper('form');
+    }
     public function index()
     {
 
